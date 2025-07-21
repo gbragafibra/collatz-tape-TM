@@ -33,7 +33,7 @@ Let's consider some of the already determined machines for from $n = 2$ to $n = 
 |9|$k ≥ 4$|
 |10|$k ≥ 4$|
 
-A first aspect which is trivial is that powers of 2 will be simulated by k-state TMs, according to the relationship $k(n) = 2^{k}$ if $(n \& (n - 1)) == 0$ for $n > 0$, with $\&$ being the bitwise AND operator. So the next power of 2, $n = 16$, will be simulated by a 4-state TM.
+A first aspect which is trivial is that powers of 2 will be simulated by k-state TMs, according to the relationship $k(n) = 2^{k}$ if $(n$ & $(n - 1)) == 0$ for $n > 0$, with & being the bitwise AND operator. So the next power of 2, $n = 16$, will be simulated by a 4-state TM.
 
 Another remark (of things to do) is to search in a better manner for such machines. The exclusion of isomorphic machines along with non-sensical (ones which halt at the start) that will never be able to simulate a collatz tape, should be considered as the search space for machines with 4-states has the size of 25600000000. The size of the search space for k-state 2-symbol TMs being:
 
