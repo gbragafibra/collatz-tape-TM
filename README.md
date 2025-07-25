@@ -31,7 +31,7 @@ Let's consider some of the already determined machines for from $n = 2$ to $n = 
 |7|$k ≥ 4$|
 |8|`1RB0LA_1RC0LA_1LH0LA`|
 |9|$k ≥ 4$|
-|10|$k ≥ 4$|
+|10|`1RB0RD_1LA0LC_1RD0LA_1LH0RC` (hand-crafted)|
 
 A first aspect which is trivial is that powers of 2 will be simulated by k-state TMs, according to the relationship $k(n) = 2^{k}$ if $(n$ & $(n - 1)) == 0$ for $n > 0$, with & being the bitwise AND operator. So the next power of 2, $n = 16$, will be simulated by a 4-state TM.
 
