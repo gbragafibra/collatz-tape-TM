@@ -1,5 +1,5 @@
 n, machine
-2, 1LH0LA
+2, 1LH0LA (or 1RH0LA)
 3,
 4, 1RB0LA_1LH0LA
 5, 1LB0LA_1RC0LA_1LH0RB
@@ -7,4 +7,4 @@ n, machine
 7, 
 8, 1RB0LA_1RC0LA_1LH0LA
 9, 
-10, 
+10, 1RB0RD_1LA0LC_1RD0LA_1LH0RC (hand-crafted)
