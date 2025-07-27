@@ -30,32 +30,50 @@ def collatz_tape(n, *args):
 	T = int(T.strip("0")) #get rid of exterior 0s (0^∞)
 	T_space = int("1" * space) #1^space (in tape compressed format)
 	#print(f"{int(n_init)}; T: {T}; 1^space(n): {T_space}; T_ratio: {T/T_space:.4f}")
-	return Σ/τ, T/T_space
+	return Σ/τ, T/T_space, len(str(T))/len(str(T_space)), int(str(T), 2)/int(str(T_space), 2) #denary form
 
 
 if __name__ == "__main__":
 	mpmath.mp.dps = 501
 	n = 2
-	end = n + 100
+	end = n + 50000
 	nums = [n + mpmath.mpf(i) for i in range(int(end - n))]
 	N = 500
 
 	all_res = [collatz_tape(ns) for ns in tqdm(nums, desc = "Collatz n", unit = "n")]
 	Σ_τ_ratio = [res[0] for res in all_res]
 	T_ratio = [res[1] for res in all_res]
+	T_len = [res[2] for res in all_res]
+	denary_T_ratio = [res[3] for res in all_res]
 	"""
 	np.set_printoptions(suppress=True)# disable scientific notation
 	print(np.unique(T_ratio, return_counts = True))
 	"""
 	fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 5))
 
-	p = ax1.scatter(range(len(nums)), T_ratio, c = Σ_τ_ratio, s = 0.05, cmap= "coolwarm_r")
-	fig.colorbar(p, ax = ax1, label = "$Σ/τ$")
-	ax1.set_ylabel(r"$T/1^{\text{space(n)}}$")
+	# for T_ratio
+	#p = ax1.scatter(range(len(nums)), T_ratio, c = Σ_τ_ratio, s = 0.05, cmap= "coolwarm_r")
+	#fig.colorbar(p, ax = ax1, label = "$Σ/τ$")
+	#ax1.set_ylabel(r"$T/1^{\text{space(n)}}$")
+
+	#for T_len
+	#p = ax1.scatter(range(len(nums)), T_len, c = T_ratio, s = 0.05, cmap= "coolwarm_r")
+	#fig.colorbar(p, ax = ax1, label = r"$T/1^{\text{space(n)}}$")
+	#ax1.set_ylabel(r"$\text{len}(T)/\text{len}(1^{\text{space(n)}})$")
+
+	#for denary_T_ratio
+	p = ax1.scatter(range(len(nums)), denary_T_ratio, c = Σ_τ_ratio, s = 0.05, cmap= "coolwarm_r")
+	fig.colorbar(p, ax = ax1, label = r"$Σ/τ$")
+	ax1.set_ylabel(r"$T_{10}/(1^{\text{space(n)}})_{10}$")
+
+
 	ax1.set_xlabel("$n$")
 
 	#ax2.hist(T_ratio, bins = 50, color = "darkcyan", edgecolor = "black")
-	counts, bins = np.histogram(T_ratio, bins = 200)
+	#counts, bins = np.histogram(T_ratio, bins = 200)
+	#counts, bins = np.histogram(T_len, bins = 200) 
+	counts, bins = np.histogram(denary_T_ratio, bins = 200) 
+
 	"""#checking for classes of nums (8 classes: 4 classes each with 2 sub-classes)
 	for i, count in enumerate(counts):
 		if count > 0:
@@ -86,7 +104,9 @@ if __name__ == "__main__":
 
 	ax2.bar(bins[:-1], relative_freq * 100, width = np.diff(bins), align = "edge",
         color = "darkcyan", edgecolor = "black")
-	ax2.set_xlabel(r"$T/1^{\text{space(n)}}$")
+	#ax2.set_xlabel(r"$T/1^{\text{space(n)}}$")
+	#ax2.set_xlabel(r"$\text{len}(T)/\text{len}(1^{\text{space(n)}})$")
+	ax2.set_xlabel(r"$T_{10}/(1^{\text{space(n)}})_{10}$")
 	ax2.set_ylabel("Relative frequency (%)")
 
 	plt.tight_layout()
